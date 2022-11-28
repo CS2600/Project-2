@@ -5,25 +5,19 @@ double static excessExpenses;
 double static amountSaved;
 
 //Calculates allowed expenses
-void setTotalAllowedExpenses(double allowedExpenses, double dailyAllowedExpenses, int numberOfDays){
+void calculateExpenses(double fee, double dailyAllowedExpenses, int numberOfDays){
     allowedExpenses = dailyAllowedExpenses * numberOfDays;
     totalAllowableExpenses += allowedExpenses;;
- }
-
+ 
 //Calculates total expenses
-void setTotalExpenses(double totalExpenses, double fee){
     totalExpenses +=fee;
-}
     
-void setExcessExpenses(double allowedExpenses, double fee, double excessExpenses){
     if(fee-allowedExpenses > 0)
     {
         //Calculates excess expenses
         excessExpenses += (fee - allowedExpenses);
     }
-}
 
-void setSavedAmount(double allowedExpenses, double fee, double amountSaved){
     if(fee-allowedExpenses < 0)
     {
         //Calculates amount saved
@@ -31,8 +25,18 @@ void setSavedAmount(double allowedExpenses, double fee, double amountSaved){
     }
 }
 
-
-
+void setTotalExpenses(double fee){
+    totalExpenses = fee;
+}
+void setTotalAllowableExpenses(double fee){
+    totalAllowableExpenses = fee;
+}
+void setExcessExpenses(double fee){
+    excessExpenses = fee;
+}
+void setAmountSaved(double fee){
+    amountSaved = fee;
+}
 
 double getTotalExpenses(){
     return totalExpenses;
@@ -45,4 +49,4 @@ double getExcessExpenses(){
 }
 double getAmountSaved(){
     return amountSaved;
-}
+}   

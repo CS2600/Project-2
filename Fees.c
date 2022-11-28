@@ -102,3 +102,68 @@ int hotelFees(int days, double fee){
     calculateExpenses(price, 90, days);
     return 1;
 }
+
+int eligibleMeals(int depart, int arrival){
+    if (validateTime(depart) == -1 || validateTime(arrival) == -1 ){
+        return -1;
+    }
+    if (depart < 700){
+        return 1;
+    }
+    if (depart >= 700 && depart < 1200){
+        return 2;
+    }
+    if (depart >= 1200 && depart < 1800){
+        return 3;
+    }
+    if (depart >= 1800){
+        return 4;
+    }
+    if (arrival < 800){
+        return 5;
+    }
+    if (arrival >= 800 && arrival < 1300){
+        return 6;
+    }
+    if (arrival >= 1300 && arrival < 1900){
+        return 7;
+    }
+    if (arrival >= 1900){
+        return 8;
+    }
+}
+
+int mealFees(int departMeal, int arriveMeal, double departFee, double arriveFee){
+    if (validateTime(departMeal) == -1 || validateTime(arriveMeal) == -1 ){
+        return -1;
+    }
+    if (validateTime(departMeal) == -1 || validateTime(arriveMeal) == -1 ){
+        return -1;
+    }
+    //depart breakfast is elligible
+    if (departMeal == 1){
+        calculateExpenses(departFee, 9, 1);
+    }
+    //depart lunch is elligible
+    if (departMeal == 2){
+        calculateExpenses(departFee, 12, 1);
+    }
+    //depart dinner is elligible
+    if (departMeal == 3){
+        calculateExpenses(departFee, 16, 1);
+    }
+    //arrive breakfast is elligible
+    if (arriveMeal == 6){
+        calculateExpenses(arriveFee, 9, 1);
+    }
+    //arrive lunch is elligible
+    if (arriveMeal == 7){
+        calculateExpenses(arriveFee, 12, 1);
+    }
+    //arrive dinner is elligible
+    if (arriveMeal == 8){
+        calculateExpenses(arriveFee, 16, 1);
+    }
+
+    return 1;
+}

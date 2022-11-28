@@ -1,5 +1,6 @@
 #include<stdio.h>
 
+//validates fee input
 int validateFee(double fee){
     if (fee >= 0){
         return 1;
@@ -9,6 +10,7 @@ int validateFee(double fee){
     }
 }
 
+//validates miles input
 int validateMiles(double miles){
     if (miles >= 0){
         return 1;
@@ -18,6 +20,7 @@ int validateMiles(double miles){
     }
 }
 
+//validates days input
 int validateDays(int days){
     if (days >= 1){
         return 1;
@@ -27,6 +30,7 @@ int validateDays(int days){
     }
 }
 
+//validates time input
 int validateTime(int time){
     if (time >= 0 && time <= 2359){
         return 1;
@@ -36,6 +40,7 @@ int validateTime(int time){
     }
 }
 
+//calculates private car expenses
 int privateCar(double miles){
     double price;
 
@@ -49,6 +54,7 @@ int privateCar(double miles){
     return 1;
 }
 
+//calculates rental car expenses
 int rentalCar(int days, double pricePerDay){
     double price;
 
@@ -62,6 +68,7 @@ int rentalCar(int days, double pricePerDay){
     return 1;
 }
 
+//calculates parking expenses
 int parkingFees(int days, double fee){
 
     if (validateDays(days) == -1 || validateFee(fee) == -1){
@@ -72,6 +79,7 @@ int parkingFees(int days, double fee){
     return 1;
 }
 
+//calculates taxi expenses
 int taxiFees(int days, double fee){
 
     if (validateDays(days) == -1 || validateFee(fee) == -1){
@@ -82,6 +90,7 @@ int taxiFees(int days, double fee){
     return 1;
 }
 
+//calculates registration expenses
 int registrationFees(double fee){
     if (validateFee(fee) == -1){
         return -1;
@@ -90,6 +99,7 @@ int registrationFees(double fee){
     return 1;
 }
 
+//calculates hotel expenses
 int hotelFees(int days, double fee){
     double price;
 
@@ -103,31 +113,40 @@ int hotelFees(int days, double fee){
     return 1;
 }
 
+//determines what meals are eligible for arrival and departure. ARRIVAL AND DEPARTURE MIGHT NEED TO BE SEPARTED
 int eligibleMeals(int depart, int arrival){
     if (validateTime(depart) == -1 || validateTime(arrival) == -1 ){
         return -1;
     }
+    //breakfast is eligible
     if (depart < 700){
         return 1;
     }
+    //lunch is eligible
     if (depart >= 700 && depart < 1200){
         return 2;
     }
+    //dinner is eligible
     if (depart >= 1200 && depart < 1800){
         return 3;
     }
+    //none are eligible
     if (depart >= 1800){
         return 4;
     }
+    //none are eligible
     if (arrival < 800){
         return 5;
     }
+    //breakfast is eligible
     if (arrival >= 800 && arrival < 1300){
         return 6;
     }
+    //lunch is eligible
     if (arrival >= 1300 && arrival < 1900){
         return 7;
     }
+    //dinner is eligible
     if (arrival >= 1900){
         return 8;
     }
@@ -140,27 +159,27 @@ int mealFees(int departMeal, int arriveMeal, double departFee, double arriveFee)
     if (validateTime(departMeal) == -1 || validateTime(arriveMeal) == -1 ){
         return -1;
     }
-    //depart breakfast is elligible
+    //depart breakfast is eligible
     if (departMeal == 1){
         calculateExpenses(departFee, 9, 1);
     }
-    //depart lunch is elligible
+    //depart lunch is eligible
     if (departMeal == 2){
         calculateExpenses(departFee, 12, 1);
     }
-    //depart dinner is elligible
+    //depart dinner is eligible
     if (departMeal == 3){
         calculateExpenses(departFee, 16, 1);
     }
-    //arrive breakfast is elligible
+    //arrive breakfast is eligible
     if (arriveMeal == 6){
         calculateExpenses(arriveFee, 9, 1);
     }
-    //arrive lunch is elligible
+    //arrive lunch is eligible
     if (arriveMeal == 7){
         calculateExpenses(arriveFee, 12, 1);
     }
-    //arrive dinner is elligible
+    //arrive dinner is eligible
     if (arriveMeal == 8){
         calculateExpenses(arriveFee, 16, 1);
     }

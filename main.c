@@ -8,9 +8,12 @@ int main(void)
     int choice = 0; 
     int totalNumOfDays = 0; 
     int departureTime = 0;
+    double departMeal = 0.0;
     int arrivalTime = 0;
+    double arriveMeal = 0.0;
     bool carRented = false; 
-    double priceCarRent = 0.0; 
+    double priceCarRent = 0.0;
+    double totalRentPrice = 0.0; 
     bool privCarUsed = false;
     double milesDriven = 0.0;
     double privateCarCost = 0.0;
@@ -19,26 +22,12 @@ int main(void)
     double taxiCost = 0.0; 
     double hotelCost = 0.0;
     double totalHotelCost = 0.0;
-    double hotelCostByCompany = 0.0;    //might not need
     int daysParked = 0; 
     double parkingCost = 0.0;
     double totalParkingCost = 0.0;
-    double parkingCostComp = 0.0;       //might not need
     double airfareCost = 0.0; 
-    double conferenceCost = 0.0; 
-    double breakfast = 0.0;
-    double lunch = 0.0;
-    double dinner = 0.0;
-    double totalFoodCost = 0.0; 
-    int numOfBreakfast = 0;
-    int numOfLunch = 0;
-    int numOfDinner = 0; 
-    double companyCovFood = 0;      //might not need
-    double totalExpenses = 0;
-    double companyCovExpenses = 0;  //might not need
-    double taxi = 0;
-    double companyCovTaxi  = 0;     //might not need
-    double totalRentPrice = 0;
+    double conferenceCost = 0.0;
+    double totalConfCost = 0.0; 
     double reimbursement = 0.0;
     double moneySaved = 0.0; 
 
@@ -69,6 +58,26 @@ int main(void)
                 printf("Invalid time! Please enter a valid time format: ");
                 scanf("%d", &departureTime);
             }
+            //Validates and asks for eligible meal fee based on departure time
+            if (eligbleMeals(departureTime) == 1)
+            {
+                printf("You're eligible for a covered breakfast! Enter the cost of your breakfast: ");
+                scanf("%d", &departMeal);
+            }
+            else if (eligibleMeals(departureTime) == 2)
+            {
+                printf("You're eligible for a covered lunch! Enter the cost of your breakfast: ");
+                scanf("%d", &departMeal);
+            }
+            else if (eligibleMeals(departureTime) == 3)
+            {
+                printf("You're eligible for a covered dinner! Enter the cost of your breakfast: ");
+                scanf("%d", &departMeal);
+            }
+            else
+            {
+                printf("Sorry, you are not eligible for a covered meal.");
+            }
 
             //Gets user's arrival time
             printf("Enter your arrival time on the last day in 24-hour format (ex. 0801 for 8:01am and 2200 for 10:00pm): ");
@@ -77,7 +86,30 @@ int main(void)
             {
                 printf("Invalid time! Please enter a valid time format: ");
                 scanf("%d", &arrivalTime);
+            }
+            //Validates and asks for eligible meal fee based on arrival time
+            if (eligbleMeals(arrivalTime) == 6)
+            {
+                printf("You're eligible for a covered breakfast! Enter the cost of your breakfast: ");
+                scanf("%d", &arriveMeal);
+            }
+            else if (eligibleMeals(arrivalTime) == 7)
+            {
+                printf("You're eligible for a covered lunch! Enter the cost of your breakfast: ");
+                scanf("%d", &arriveMeal);
+            }
+            else if (eligibleMeals(arrivalTime) == 8)
+            {
+                printf("You're eligible for a covered dinner! Enter the cost of your breakfast: ");
+                scanf("%d", &arriveMeal);
+            }
+            else
+            {
+                printf("Sorry, you are not eligible for a covered meal.");
             }    
+
+            //Calculates covered meal costs for first and last day
+            mealFees(eligbleMeals(departureTime), eligbleMeals(arrivalTime), departMeal, arriveMeal);
 
             //Asks user if rented car was used
             printf("\nDid you rent a car during your trip? Enter 1 for true and 0 for false: ");
@@ -138,7 +170,7 @@ int main(void)
 
                 printf("Enter total taxi cost during your trip: ");
                 scanf("%f", &taxiCost);
-                //companyCovTaxi(taxiDays);   //Calculates taxi fee covered by company
+                taxiFees(taxiDays, taxiCost);   //Calculates taxi fee covered by company
             }
             
             //Asks user for hotel cost 
@@ -149,7 +181,7 @@ int main(void)
             //Asks user for parking cost
             printf("\nEnter number of days for parking: "); 
             scanf("%d", &daysParked); 
-            while(daysParked <0 || daysParked > totalNumOfDays)     //Validates user's input
+            while(daysParked < 0 || daysParked > totalNumOfDays)     //Validates user's input
             {
                 printf("Invalid input! Please enter number of days for parking: ");
                 scanf("%d", &daysParked); 
@@ -175,46 +207,15 @@ int main(void)
                 printf("Invalid input! Enter the total amount of any conference or seminar fees: ");
                 scanf("%lf", &conferenceCost);
             }
+            totalConfCost = registrationFees(conferenceCost);   //Calculates registration fees
             fflush(stdin);
 
-            //Asks user for meal fees
-            printf("Enter total breakfast cost for your trip: ");       //Breakfast
-            scanf("%lf", &breakfast);
-            while(breakfast < 0)
-            {
-                printf("Invalid input! Please enter total breakfast cost for your trip: ");
-                scanf("%lf", &breakfast);
-            }
-            fflush(stdin);
-            printf("Enter total lunch cost for your trip: ");       //Lunch
-            scanf("%lf", &lunch);
-            while(lunch < 0)
-            {
-                printf("Invalid input! Please enter total lunch cost for your trip: ");
-                scanf("%lf", &lunch);
-            }
-            fflush(stdin);
-            printf("Enter total dinner cost for your trip: ");      //Dinner
-            scanf("%lf", &dinner);
-            while(breakfast < 0)
-            {
-                printf("Invalid input! Please enter total dinner cost for your trip: ");
-                scanf("%lf", &dinner);
-            }
-            totalFoodCost = breakfast + lunch + dinner; 
-            
-            //Number of meals covered by company
-            
-            
-            //TOTAL EXPENSES 
-            totalExpenses = totalFoodCost + airfareCost + conferenceCost + parkingCost + hotelCost + taxi + privateCarCost + totalRentPrice;
-            companyCovExpenses = companyCovFood + parkingCostComp + hotelCostByCompany + companyCovTaxi;
-            
             //DISPLAY INFORMATION
             printf("\nThe total expenses incurred by the businessperson: %.2lf", getTotalExpenses());
             printf("The total allowable expenses for the trip, %.2lf", getTotalAllowableExpenses()); 
             printf("\nTotal money saved is: %.2lf", getAmountSaved());
             printf("Total reimbursement is: %.2lf", getExcessExpenses());
+
         }
         else if(choice == 2)
         {

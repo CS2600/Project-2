@@ -149,10 +149,11 @@ void Should_add_Hotel_fee_expenses(void)
     setAmountSaved(0);
 }
 
+// INCOMPLETE
 void Should_add_Meal_Fee_expenses(void)
 {
-    double mile = 10;
-    double totalExpenses = mile * 0.27;
+    double time = 1000; // 1000 = 10:00
+    double fee = ;
     
 
     TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), totalExpenses);
@@ -164,6 +165,116 @@ void Should_add_Meal_Fee_expenses(void)
     setTotalAllowableExpenses(0);
     setExcessExpenses(0);
     setAmountSaved(0);
+}
+
+void Should_reject_Private_car_expenses_Invalid_mile() {
+    double mile = -1;
+    privateCar(mile);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+
+void Should_reject_Parking_fee_expenses_Invalid_fee() {
+    double fees = -10;
+    int days = 5;
+
+    parkingFees(days, fees);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+void Should_reject_Parking_fee_expenses_Invalid_day() {
+    double fees = 10;
+    int days = -5;
+
+    parkingFees(days, fees);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+
+void Should_reject_Rental_car_expenses_Invalid_day() {
+    int days = -4;
+    double pricePerDay = 29.99;
+
+    rentalCar(days, pricePerDay);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+
+void Should_reject_Taxi_fee_expenses_Invalid_day() {
+    double days = -6;
+    double fees = 90;
+
+    taxiFees(days, fees);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+void Should_reject_Taxi_fee_expenses_Invalid_fee() {
+    double days = 6;
+    double fees = -90;
+
+    taxiFees(days, fees);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+
+void Should_reject_Registration_fee_expenses_Invalid_fee() {
+    double fees = -100;
+    
+    registrationFees(fees);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+
+    setTotalExpenses(0);
+    setTotalAllowableExpenses(0);
+    setExcessExpenses(0);
+    setAmountSaved(0);
+}
+
+void Should_reject_Hotel_fee_expenses_Invalid_day() {
+    double days = 0;
+    double totalFees = 150;
+
+    hotelFees(days, fees);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+
+void Should_reject_Hotel_fee_expenses_Negative_fee() {
+    double days = 2;
+    double totalFees = -150;
+
+    hotelFees(days, fees);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+void Should_reject_Meal_Fee_expenses() {
+
 }
 
 

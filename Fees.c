@@ -36,52 +36,69 @@ int validateTime(int time){
     }
 }
 
-double privateCar(double miles){
+int privateCar(double miles){
     double price;
+
+    if (validateMiles(miles) == -1){
+        return -1;
+    }
 
     price = 0.27 * miles;
 
     calculateExpenses(price, price, 1); //flat fee, so allowedExpenses is same as fee
-    return price;
+    return 1;
 }
 
-double rentalCar(int days, double pricePerDay){
+int rentalCar(int days, double pricePerDay){
     double price;
+
+    if (validateDays(days) == -1 || validateFee(pricePerDay) == -1){
+        return -1;
+    }
 
     price = pricePerDay * days;
 
     calculateExpenses(price, price, 1); //flat fee, so allowedExpenses is same as fee
-    return price;
+    return 1;
 }
 
-double parkingFees(int days, double fee){
-    double price;
+int parkingFees(int days, double fee){
 
-    price = fee * days;
+    if (validateDays(days) == -1 || validateFee(fee) == -1){
+        return -1;
+    }
 
-    calculateExpenses(price, 6, days);
-    return price;
+    calculateExpenses(fee, 6, days);
+    return 1;
 }
 
-double taxiFees(int days, double fee){
-    double price;
+int taxiFees(int days, double fee){
 
-    price = fee * days;
+    if (validateDays(days) == -1 || validateFee(fee) == -1){
+        return -1;
+    }
 
-    calculateExpenses(price, 10, days);
-    return price;
+    calculateExpenses(fee, 10, days);
+    return 1;
 }
 
-double registrationFees(double fee){
+int registrationFees(double fee){
+    if (validateFee(fee) == -1){
+        return -1;
+    }
     calculateExpenses(fee, fee, 1); //flat fee, so allowedExpenses is same as fee
-    return fee;
+    return 1;
 }
 
-double hotelFees(int days, double fee){
+int hotelFees(int days, double fee){
     double price;
+
+    if (validateDays(days) == -1 || validateFee(fee) == -1){
+        return -1;
+    }
 
     price = fee * days;
 
     calculateExpenses(price, 90, days);
-    return price;
+    return 1;
 }

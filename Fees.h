@@ -1,3 +1,4 @@
+int airfare(double fee);
 int privateCar(double miles);
 int rentalCar(int days, double pricePerDay);
 int parkingFees(int days, double fee);

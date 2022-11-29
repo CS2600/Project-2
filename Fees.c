@@ -41,6 +41,15 @@ int validateTime(int time){
     }
 }
 
+//calculates round trip airfare
+int airfare(double fee){
+    if (validateFee(fee) == -1){
+        return -1;
+    }
+    calculateExpenses(fee, 0, 0);
+    return 1;
+}
+
 //calculates private car expenses
 int privateCar(double miles){
     double price;
@@ -51,7 +60,7 @@ int privateCar(double miles){
 
     price = 0.27 * miles;
 
-    calculateExpenses(price, price, 1); //flat fee, so allowedExpenses is same as fee
+    calculateExpenses(price, 0, 0);
     return 1;
 }
 
@@ -65,7 +74,7 @@ int rentalCar(int days, double pricePerDay){
 
     price = pricePerDay * days;
 
-    calculateExpenses(price, price, 1); //flat fee, so allowedExpenses is same as fee
+    calculateExpenses(price, 0, 0);
     return 1;
 }
 
@@ -96,7 +105,7 @@ int registrationFees(double fee){
     if (validateFee(fee) == -1){
         return -1;
     }
-    calculateExpenses(fee, fee, 1); //flat fee, so allowedExpenses is same as fee
+    calculateExpenses(fee, 0, 0);
     return 1;
 }
 

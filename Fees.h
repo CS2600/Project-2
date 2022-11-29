@@ -1,8 +1,3 @@
-int validateFee(double fee);
-int validateMiles(double miles);
-int validateDays(int days);
-int validateTime(int time);
-
 int privateCar(double miles);
 int rentalCar(int days, double pricePerDay);
 int parkingFees(int days, double fee);

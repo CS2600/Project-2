@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include "FeesCalculator.h"
 
 //validates fee input
 int validateFee(double fee){

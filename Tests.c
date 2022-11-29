@@ -279,6 +279,7 @@ void Should_reject_Hotel_fee_expenses_Invalid_fee() {
     TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
 }
 
+//INCOMPLETE
 void Should_reject_Meal_Fee_expenses() {
 
 }
@@ -290,8 +291,9 @@ void Should_add_all_fees() {
     double parkingFee = 14.98;
     double taxiFee = 98.76;
     double registrationFee = 39.75;
-    double hotelFees = 1234.56;
-    double total = (miles * days) + ()
+    double hotelFee = 1234.56;
+    double total = (miles * days) + (rentalCarFee * days) + parkingFee + taxiFee + registrationFee + hotelFee;
+    double totalAllowable = (days * (6 + 10)) + ((days - 1) * 90);
     //meal??
 
     double excess = 0;
@@ -323,10 +325,10 @@ void Should_add_all_fees() {
 
 
 
-    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), totalExpenses);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), total);
     TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), totalExpenses);
-    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
-    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), excess);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), saved);
 
     setTotalExpenses(0);
     setTotalAllowableExpenses(0);
@@ -335,28 +337,29 @@ void Should_add_all_fees() {
 }
 
 
-int main(void)
-{
-UNITY_BEGIN();
+int main(void) {
+    UNITY_BEGIN();
 
-RUN_TEST(Should_add_Private_car_expenses);
-RUN_TEST(Should_add_Parking_fee_expenses);
-RUN_TEST(Should_add_Rental_car_expenses);
-RUN_TEST(Should_add_Taxi_fee_expenses);
-RUN_TEST(Should_add_Registration_fee_expenses);
-RUN_TEST(Should_add_Hotel_fee_expenses);
-RUN_TEST(Should_add_Meal_Fee_expenses);
+    RUN_TEST(Should_add_Private_car_expenses);
+    RUN_TEST(Should_add_Parking_fee_expenses);
+    RUN_TEST(Should_add_Rental_car_expenses);
+    RUN_TEST(Should_add_Taxi_fee_expenses);
+    RUN_TEST(Should_add_Registration_fee_expenses);
+    RUN_TEST(Should_add_Hotel_fee_expenses);
+    RUN_TEST(Should_add_Meal_Fee_expenses);
 
-RUN_TEST(Should_reject_Private_car_expenses_Invalid_mile);
-RUN_TEST(Should_reject_Parking_fee_expenses_Invalid_day);
-RUN_TEST(Should_reject_Parking_fee_expenses_Invalid_fee);
-RUN_TEST(Should_reject_Rental_car_expenses_Invalid_day);
-RUN_TEST(Should_reject_Taxi_fee_expenses_Invalid_day);
-RUN_TEST(Should_reject_Taxi_fee_expenses_Invalid_fee);
-RUN_TEST(Should_reject_Registration_fee_expenses_Invalid_fee);
-RUN_TEST(Should_reject_Hotel_fee_expenses_Invalid_day);
-RUN_TEST(Should_reject_Hotel_fee_expenses_Invalid_fee);
-RUN_TEST(Should_reject_Meal_Fee_expenses);
+    RUN_TEST(Should_reject_Private_car_expenses_Invalid_mile);
+    RUN_TEST(Should_reject_Parking_fee_expenses_Invalid_day);
+    RUN_TEST(Should_reject_Parking_fee_expenses_Invalid_fee);
+    RUN_TEST(Should_reject_Rental_car_expenses_Invalid_day);
+    RUN_TEST(Should_reject_Taxi_fee_expenses_Invalid_day);
+    RUN_TEST(Should_reject_Taxi_fee_expenses_Invalid_fee);
+    RUN_TEST(Should_reject_Registration_fee_expenses_Invalid_fee);
+    RUN_TEST(Should_reject_Hotel_fee_expenses_Invalid_day);
+    RUN_TEST(Should_reject_Hotel_fee_expenses_Invalid_fee);
+    RUN_TEST(Should_reject_Meal_Fee_expenses);
 
-return UNITY_END();
+    RUN_TEST(Should_add_all_fees);
+
+    return UNITY_END();
 }

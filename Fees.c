@@ -103,6 +103,8 @@ int registrationFees(double fee){
 int hotelFees(int days, double fee){
     double price;
 
+    days = days -1;
+
     if (validateDays(days) == -1 || validateFee(fee) == -1){
         return -1;
     }
@@ -113,9 +115,9 @@ int hotelFees(int days, double fee){
     return 1;
 }
 
-//determines what meals are eligible for arrival and departure. ARRIVAL AND DEPARTURE MIGHT NEED TO BE SEPARTED
-int eligibleMeals(int depart, int arrival){
-    if (validateTime(depart) == -1 || validateTime(arrival) == -1 ){
+//determines what meals are eligible for departure.
+int eligibleDepartMeals(int depart){
+    if (validateTime(depart) == -1){
         return -1;
     }
     //breakfast is eligible
@@ -133,6 +135,13 @@ int eligibleMeals(int depart, int arrival){
     //none are eligible
     if (depart >= 1800){
         return 4;
+    }
+}
+
+//determines what meals are eligible for arrival.
+int eligibleArrivalMeals(int arrival){
+    if (validateTime(arrival) == -1){
+        return -1;
     }
     //none are eligible
     if (arrival < 800){

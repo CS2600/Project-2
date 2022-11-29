@@ -1,5 +1,5 @@
-//#include "Fees.h"
-//#include "FeesCalculator.h"
+#include "Fees.h"
+#include "FeesCalculator.h"
 #include<stdio.h>
 #include<stdbool.h>
 
@@ -27,7 +27,6 @@ int main(void)
     double totalParkingCost = 0.0;
     double airfareCost = 0.0; 
     double conferenceCost = 0.0;
-    double totalConfCost = 0.0; 
     double reimbursement = 0.0;
     double moneySaved = 0.0; 
 
@@ -59,17 +58,17 @@ int main(void)
                 scanf("%d", &departureTime);
             }
             //Validates and asks for eligible meal fee based on departure time
-            if (eligbleMeals(departureTime) == 1)
+            if (eligibleDepartMeals(departureTime) == 1)
             {
                 printf("You're eligible for a covered breakfast! Enter the cost of your breakfast: ");
                 scanf("%d", &departMeal);
             }
-            else if (eligibleMeals(departureTime) == 2)
+            else if (eligibleDepartMeals(departureTime) == 2)
             {
                 printf("You're eligible for a covered lunch! Enter the cost of your breakfast: ");
                 scanf("%d", &departMeal);
             }
-            else if (eligibleMeals(departureTime) == 3)
+            else if (eligibleDepartMeals(departureTime) == 3)
             {
                 printf("You're eligible for a covered dinner! Enter the cost of your breakfast: ");
                 scanf("%d", &departMeal);
@@ -88,17 +87,17 @@ int main(void)
                 scanf("%d", &arrivalTime);
             }
             //Validates and asks for eligible meal fee based on arrival time
-            if (eligbleMeals(arrivalTime) == 6)
+            if (eligibleArrivalMeals(arrivalTime) == 6)
             {
                 printf("You're eligible for a covered breakfast! Enter the cost of your breakfast: ");
                 scanf("%d", &arriveMeal);
             }
-            else if (eligibleMeals(arrivalTime) == 7)
+            else if (eligibleArrivalMeals(arrivalTime) == 7)
             {
                 printf("You're eligible for a covered lunch! Enter the cost of your breakfast: ");
                 scanf("%d", &arriveMeal);
             }
-            else if (eligibleMeals(arrivalTime) == 8)
+            else if (eligibleArrivalMeals(arrivalTime) == 8)
             {
                 printf("You're eligible for a covered dinner! Enter the cost of your breakfast: ");
                 scanf("%d", &arriveMeal);
@@ -109,7 +108,7 @@ int main(void)
             }    
 
             //Calculates covered meal costs for first and last day
-            mealFees(eligbleMeals(departureTime), eligbleMeals(arrivalTime), departMeal, arriveMeal);
+            mealFees(eligibleDepartMeals(departureTime), eligibleArrivalMeals(arrivalTime), departMeal, arriveMeal);   //double check if can pass function in function
 
             //Asks user if rented car was used
             printf("\nDid you rent a car during your trip? Enter 1 for true and 0 for false: ");
@@ -176,7 +175,7 @@ int main(void)
             //Asks user for hotel cost 
             printf("\nEnter hotel cost per night: ");
             scanf("&lf", &hotelCost);
-            totalHotelCost = hotelFees(totalNumOfDays, hotelCost);  //Calculates hotel fees
+            totalHotelCost = hotelFees(totalNumOfDays-1, hotelCost);  //Calculates hotel fees
 
             //Asks user for parking cost
             printf("\nEnter number of days for parking: "); 
@@ -198,6 +197,7 @@ int main(void)
                 printf("Invalid input! Please enter amount of any round-trip airfare: ");
                 scanf("%lf", &airfareCost);
             }
+            airfareCost = airfare(airfareCost);     //Calculates airfare fees
 
             //Asks user for conference fees
             printf("\nEnter the total amount of any conference or seminar fees: ");
@@ -207,7 +207,7 @@ int main(void)
                 printf("Invalid input! Enter the total amount of any conference or seminar fees: ");
                 scanf("%lf", &conferenceCost);
             }
-            totalConfCost = registrationFees(conferenceCost);   //Calculates registration fees
+            conferenceCost = registrationFees(conferenceCost);   //Calculates registration fees
             fflush(stdin);
 
             //DISPLAY INFORMATION
@@ -215,7 +215,6 @@ int main(void)
             printf("The total allowable expenses for the trip, %.2lf", getTotalAllowableExpenses()); 
             printf("\nTotal money saved is: %.2lf", getAmountSaved());
             printf("Total reimbursement is: %.2lf", getExcessExpenses());
-
         }
         else if(choice == 2)
         {

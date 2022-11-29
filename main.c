@@ -186,7 +186,7 @@ int main(void)
                 printf("Invalid input! Please enter number of days for parking: ");
                 scanf("%d", &daysParked); 
             }
-            printf("Enter parking cost per day: ");
+            printf("Enter total parking cost: ");
             scanf("%lf", &parkingCost);
             totalParkingCost = parkingFees(daysParked, parkingCost);    //Calculates parking fees
 

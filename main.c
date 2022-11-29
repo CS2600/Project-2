@@ -41,7 +41,7 @@ int main(void)
         if(choice == 1)
         {
             //Gets user's total number of days on trip 
-            printf("How many days was your trip?");
+            printf("How many days was your trip? ");
             scanf("%d", &totalNumOfDays);
             while(totalNumOfDays < 1)
             {
@@ -61,17 +61,17 @@ int main(void)
             if (eligibleDepartMeals(departureTime) == 1)
             {
                 printf("You're eligible for a covered breakfast! Enter the cost of your breakfast: ");
-                scanf("%d", &departMeal);
+                scanf("%f", &departMeal);
             }
             else if (eligibleDepartMeals(departureTime) == 2)
             {
                 printf("You're eligible for a covered lunch! Enter the cost of your breakfast: ");
-                scanf("%d", &departMeal);
+                scanf("%f", &departMeal);
             }
             else if (eligibleDepartMeals(departureTime) == 3)
             {
                 printf("You're eligible for a covered dinner! Enter the cost of your breakfast: ");
-                scanf("%d", &departMeal);
+                scanf("%f", &departMeal);
             }
             else
             {
@@ -90,17 +90,17 @@ int main(void)
             if (eligibleArrivalMeals(arrivalTime) == 6)
             {
                 printf("You're eligible for a covered breakfast! Enter the cost of your breakfast: ");
-                scanf("%d", &arriveMeal);
+                scanf("%f", &arriveMeal);
             }
             else if (eligibleArrivalMeals(arrivalTime) == 7)
             {
                 printf("You're eligible for a covered lunch! Enter the cost of your breakfast: ");
-                scanf("%d", &arriveMeal);
+                scanf("%f", &arriveMeal);
             }
             else if (eligibleArrivalMeals(arrivalTime) == 8)
             {
                 printf("You're eligible for a covered dinner! Enter the cost of your breakfast: ");
-                scanf("%d", &arriveMeal);
+                scanf("%f", &arriveMeal);
             }
             else
             {
@@ -138,11 +138,11 @@ int main(void)
             if(privCarUsed == 1)
             {
                 printf("Enter the total miles driven: ");
-                scanf("%f", milesDriven);
+                scanf("%f", &milesDriven);
                 while(milesDriven < 0)      //Validates user's input
                 {
                     printf("Invalid input! Please enter total miles drive: ");
-                    scanf("%f", milesDriven);
+                    scanf("%f", &milesDriven);
                     privateCarCost = privateCar(milesDriven);   //Calculates private car fees
                 }
             } 
@@ -163,7 +163,7 @@ int main(void)
                 scanf("%d", &taxiDays);
                 while(taxiDays < 0 || taxiDays > totalNumOfDays)    //Validates user's input
                 {
-                    printf("\nInvalid input!\nPlease enter the number of days you took a taxi: ");
+                    printf("\nInvalid input! Please enter the number of days you took a taxi: ");
                     scanf("%d", &taxiDays);
                 }
 
@@ -174,7 +174,7 @@ int main(void)
             
             //Asks user for hotel cost 
             printf("\nEnter hotel cost per night: ");
-            scanf("&lf", &hotelCost);
+            scanf("%lf", &hotelCost);
             totalHotelCost = hotelFees(totalNumOfDays-1, hotelCost);  //Calculates hotel fees
 
             //Asks user for parking cost
@@ -211,10 +211,10 @@ int main(void)
             fflush(stdin);
 
             //DISPLAY INFORMATION
-            printf("\nThe total expenses incurred by the businessperson: %.2lf", getTotalExpenses());
-            printf("The total allowable expenses for the trip, %.2lf", getTotalAllowableExpenses()); 
-            printf("\nTotal money saved is: %.2lf", getAmountSaved());
-            printf("Total reimbursement is: %.2lf", getExcessExpenses());
+            printf("\nThe total expenses incurred by the businessperson: $%.2lf", getTotalExpenses());
+            printf("The total allowable expenses for the trip: $%.2lf", getTotalAllowableExpenses()); 
+            printf("\nTotal money saved is: $%.2lf", getAmountSaved());
+            printf("Total reimbursement is: $%.2lf", getExcessExpenses());
         }
         else if(choice == 2)
         {

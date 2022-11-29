@@ -28,8 +28,8 @@ void Should_add_Private_car_expenses(void)
     privateCar(mile);
 
     TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), totalExpenses);
-    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), totalExpenses);
-    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), totalExpenses);
     TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
 
     setTotalExpenses(0);
@@ -147,6 +147,22 @@ void Should_add_Hotel_fee_expenses(void)
     TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), days * 90);
     TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), excess);
     TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), saved);
+
+    setTotalExpenses(0);
+    setTotalAllowableExpenses(0);
+    setExcessExpenses(0);
+    setAmountSaved(0);
+}
+
+void Should_add_Airfare_expenses(void) {
+    double fee = 1023.13;
+
+    airfareFees(fee);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), fee);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), fee);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
 
     setTotalExpenses(0);
     setTotalAllowableExpenses(0);
@@ -279,6 +295,17 @@ void Should_reject_Hotel_fee_expenses_Invalid_fee() {
     TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
 }
 
+void Should_reject_Airfare_expenses(void) {
+    double fee = -1;
+
+    airfareFees(fee);
+
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(getTotalAllowableExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(excessExpenses(), 0);
+    TEST_ASSERT_EQUAL_DOUBLE(amountSaved(), 0);
+}
+
 //INCOMPLETE
 void Should_reject_Meal_Fee_expenses() {
 
@@ -292,12 +319,15 @@ void Should_add_all_fees() {
     double taxiFee = 98.76;
     double registrationFee = 39.75;
     double hotelFee = 1234.56;
-    double total = (miles * days) + (rentalCarFee * days) + parkingFee + taxiFee + registrationFee + hotelFee;
+    double airfareFee = 1000;
+    double total = (miles * days) + (rentalCarFee * days) + parkingFee + taxiFee + registrationFee + hotelFee + airfareFee;
     double totalAllowable = (days * (6 + 10)) + ((days - 1) * 90);
     //meal??
 
     double excess = 0;
     double saved = 0;
+
+    excess += (miles * .27) + (rentalCarFee * days) + registrationFee + airfareFee;
 
     //Parking
     if(days * 6 > parkingFee) {
@@ -346,7 +376,8 @@ int main(void) {
     RUN_TEST(Should_add_Taxi_fee_expenses);
     RUN_TEST(Should_add_Registration_fee_expenses);
     RUN_TEST(Should_add_Hotel_fee_expenses);
-    RUN_TEST(Should_add_Meal_Fee_expenses);
+    RUN_TEST(Should_add_Airfare_expenses);
+    //RUN_TEST(Should_add_Meal_Fee_expenses);
 
     RUN_TEST(Should_reject_Private_car_expenses_Invalid_mile);
     RUN_TEST(Should_reject_Parking_fee_expenses_Invalid_day);
@@ -357,7 +388,8 @@ int main(void) {
     RUN_TEST(Should_reject_Registration_fee_expenses_Invalid_fee);
     RUN_TEST(Should_reject_Hotel_fee_expenses_Invalid_day);
     RUN_TEST(Should_reject_Hotel_fee_expenses_Invalid_fee);
-    RUN_TEST(Should_reject_Meal_Fee_expenses);
+    RUN_TEST(Should_reject_Airfare_expenses);
+    //RUN_TEST(Should_reject_Meal_Fee_expenses);
 
     RUN_TEST(Should_add_all_fees);
 

@@ -52,7 +52,7 @@ int main(void)
             //Gets user's departure time
             printf("Enter your departure time on the first day in 24-hour format (ex. 0059 for 12:59am and 1500 for 3:00pm): ");
             scanf("%d", &departureTime);
-            while(departureTime < 0 || departureTime > 1759)    //Validates departure time is before 6:00pm
+            while(departureTime < 0 || departureTime > 2359 || departureTime%100 > 59)    //Validates departure time is before 6:00pm
             {
                 printf("Invalid time! Please enter a valid time format: ");
                 scanf("%d", &departureTime);
@@ -75,13 +75,13 @@ int main(void)
             }
             else
             {
-                printf("Sorry, you are not eligible for a covered meal.");
+                printf("Sorry, you are not eligible for a covered meal.\n");
             }
 
             //Gets user's arrival time
             printf("Enter your arrival time on the last day in 24-hour format (ex. 0801 for 8:01am and 2200 for 10:00pm): ");
             scanf("%d", &arrivalTime);
-            while(arrivalTime < 801)    //Validates arrival time is after 8:00am
+            while(arrivalTime < 0 || arrivalTime > 2359 || arrivalTime%100 > 59)    //Validates arrival time is after 8:00am
             {
                 printf("Invalid time! Please enter a valid time format: ");
                 scanf("%d", &arrivalTime);
@@ -104,7 +104,7 @@ int main(void)
             }
             else
             {
-                printf("Sorry, you are not eligible for a covered meal.");
+                printf("Sorry, you are not eligible for a covered meal.\n");
             }    
 
             //Calculates covered meal costs for first and last day

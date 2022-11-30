@@ -1,4 +1,3 @@
-double allowedExpenses;
 double static totalExpenses;
 double static totalAllowableExpenses;
 double static excessExpenses;

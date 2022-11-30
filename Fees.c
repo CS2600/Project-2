@@ -33,8 +33,14 @@ int validateDays(int days){
 
 //validates time input
 int validateTime(int time){
-    if (time >= 0 && time <= 2359){
-        return 1;
+    int minutes = time % 100;
+    double hours = time / 100;
+
+    if (minutes > 59 || hours > 23.59){
+        return -1;
+    }
+    if (time < 0){
+        return -1;
     }
     else{
         return -1;

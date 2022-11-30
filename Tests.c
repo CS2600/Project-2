@@ -1,10 +1,9 @@
-/* 
-* Documentation: https://github.com/ThrowTheSwitch/Unity
-                 https://www.throwtheswitch.org/unity
-* Additional Resource: https://www.feabhas.com/sites/default/files/2016-06/Unity.pdf
-* To run: gcc Tests.c Fees.c FeesCalculator.c ./unity/src/unity.c -o Test
-*         ./Test
-*/
+/** 
+ * Documentation: https://github.com/ThrowTheSwitch/Unity
+ *                https://www.throwtheswitch.org/unity
+ * To run: gcc Tests.c Fees.c FeesCalculator.c ./unity/src/unity.c -o Test
+ *         ./Test
+ */
 #include "Unity/src/unity.h"
 #include "Fees.h"
 #include "FeesCalculator.h"

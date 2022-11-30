@@ -211,7 +211,7 @@ void Should_add_Depart_Meal_Fee_Dinner_expenses() {
 }
 
 void Should_add_Arrival_Meal_Fee_Breakfast_expenses() {
-    int time = 1300;
+    int time = 800;
     double mealFee = 15;
     double allowedExpenses = 9;
     int arrivalMeal = eligibleArrivalMeals(time);
@@ -238,7 +238,7 @@ void Should_add_Arrival_Meal_Fee_Breakfast_expenses() {
     setAmountSaved(0);
 }
 void Should_add_Arrival_Meal_Fee_Lunch_expenses() {
-    int time = 1900;
+    int time = 1300;
     double mealFee = 15;
     double allowedExpenses = 12;
     int arrivalMeal = eligibleArrivalMeals(time);
@@ -265,7 +265,7 @@ void Should_add_Arrival_Meal_Fee_Lunch_expenses() {
     setAmountSaved(0);
 }
 void Should_add_Arrival_Meal_Fee_Dinner_expenses() {
-    int time = 2345;
+    int time = 1900;
     double mealFee = 15;
     double allowedExpenses = 16;
     int arrivalMeal = eligibleArrivalMeals(time);

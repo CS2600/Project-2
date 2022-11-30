@@ -181,7 +181,7 @@ int mealFees(int departMeal, int arriveMeal, double departFee, double arriveFee)
     if (validateTime(departMeal) == -1 || validateTime(arriveMeal) == -1 ){
         return -1;
     }
-    if (validateTime(departMeal) == -1 || validateTime(arriveMeal) == -1 ){
+    if (validateFee(departFee) == -1 || validateFee(arriveFee) == -1 ){
         return -1;
     }
     //depart breakfast is eligible

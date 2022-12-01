@@ -27,8 +27,6 @@ int main(void)
     double totalParkingCost = 0.0;
     double airfareCost = 0.0; 
     double conferenceCost = 0.0;
-    double reimbursement = 0.0;
-    double moneySaved = 0.0; 
 
     printf("Welcome! This program calculates and displays the total expenses during a trip.");
     
@@ -65,12 +63,12 @@ int main(void)
             }
             else if (eligibleDepartMeals(departureTime) == 2)
             {
-                printf("You're eligible for a covered lunch! Enter the cost of your breakfast: ");
+                printf("You're eligible for a covered lunch! Enter the cost of your lunch: ");
                 scanf("%f", &departMeal);
             }
             else if (eligibleDepartMeals(departureTime) == 3)
             {
-                printf("You're eligible for a covered dinner! Enter the cost of your breakfast: ");
+                printf("You're eligible for a covered dinner! Enter the cost of your dinner: ");
                 scanf("%f", &departMeal);
             }
             else
@@ -94,12 +92,12 @@ int main(void)
             }
             else if (eligibleArrivalMeals(arrivalTime) == 7)
             {
-                printf("You're eligible for a covered lunch! Enter the cost of your breakfast: ");
+                printf("You're eligible for a covered lunch! Enter the cost of your lunch: ");
                 scanf("%f", &arriveMeal);
             }
             else if (eligibleArrivalMeals(arrivalTime) == 8)
             {
-                printf("You're eligible for a covered dinner! Enter the cost of your breakfast: ");
+                printf("You're eligible for a covered dinner! Enter the cost of your dinner: ");
                 scanf("%f", &arriveMeal);
             }
             else
@@ -212,9 +210,9 @@ int main(void)
 
             //DISPLAY INFORMATION
             printf("\nThe total expenses incurred by the businessperson: $%.2lf", getTotalExpenses());
-            printf("The total allowable expenses for the trip: $%.2lf", getTotalAllowableExpenses()); 
+            printf("\nThe total allowable expenses for the trip: $%.2lf", getTotalAllowableExpenses()); 
             printf("\nTotal money saved is: $%.2lf", getAmountSaved());
-            printf("Total reimbursement is: $%.2lf", getExcessExpenses());
+            printf("\nTotal reimbursement is: $%.2lf", getExcessExpenses());
         }
         else if(choice == 2)
         {
